@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<h1>Products</h1>
+
+{% for p in products %}
+<div class="card" style="width: 50rem;">
+    <div class="card-body">
+        <h3 class="card-title">{{p.productname}} </h3>
+        <h5 class="card-text">Supplier: {{p.supplier.companyname}}</h5>
+        <p class="card-text">packagesize: {{p.packagesize}} | unitprice: {{p.unitprice}}</p>
+        <p class="card-text" style="color: green;">Units in stock: {{p.unitsinstock}}</p>
+
+        <!-- <a href="/edit-product-get/{{p.id}}/" class="btn btn-primary">Edit</a>
+        <a href="/confirm-delete-product/{{p.id}}/" class="btn btn-danger">Delete</a>
+        <a href="/products-by-supplier/{{p.supplier.id}}/" class="btn btn-secondary">{{p.supplier.companyname}}´s all Products</a> -->
+
+    </div>
+</div>
+
+
+{% empty %}
+
+<h2>Ei mitään täällä!</h2>
+
+{%endfor%}
+
+{% endblock %}
