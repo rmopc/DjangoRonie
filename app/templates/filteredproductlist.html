@@ -2,13 +2,14 @@
 
 {% block content %}
 
-<h1>All products</h1>
+<h1>Products by  {{supplier.companyname}}</h1>
 
 <div id="add-div"></div>
 <br />
 
 <button id="add-btn" class="btn btn-success" onclick="showaddform()">Add new Product</button>
 <br />
+<a href="/products/" class="btn btn-secondary">Back to all Products</a>
 <br />
 
 {% for p in products %}
@@ -22,7 +23,7 @@
 
             <a href="/edit-product-get/{{p.id}}/" class="btn btn-primary">Edit</a>
             <a href="/confirm-delete-product/{{p.id}}/" class="btn btn-danger">Delete</a>
-            <a href="/products-by-supplier/{{p.supplier.id}}/" class="btn btn-secondary">{{p.supplier.companyname}}´s all Products</a>
+            
 
         </div>
     </div>

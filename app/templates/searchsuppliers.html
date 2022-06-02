@@ -10,6 +10,9 @@
 
 <button id="add-btn" class="btn btn-success" onclick="showaddform()">Add new supplier</button>
 <br />
+
+<a href="/suppliers" class="btn btn-primary">Show all suppliers</a>
+
 <br />
 <form method="post" action="/search-suppliers/">
 
@@ -38,7 +41,7 @@
 
     {% empty %}
 
-    <h2>Ei mitään täällä!</h2>
+    <h2>No matches found.</h2>
 </div>
 {%endfor%}
 
