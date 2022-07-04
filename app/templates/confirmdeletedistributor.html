@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<h1>Delete Distributor?</h1>
+
+<div class="card" style="width: 50rem;">
+    <div class="card-body">
+        <h3 class="card-title">Confirm removal of distributor</h3>
+        <h5 class="card-text">Company: {{distributor.companyname}}</h5>
+        
+        <a href="/distributors/" class="btn btn-primary">Back</a>
+
+        <a href="/delete-distributor/{{distributor.id}}/" class="btn btn-danger">Delete</a>
+
+    </div>
+</div>
+
+{% endblock %}

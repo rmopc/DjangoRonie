@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="card" style="width: 25rem;">
+    <div class="card-header">
+
+        <h5>Editing {{distributor.companyname}}</h5>
+        <!-- tarkista tartteeko product-etuliitteen -->
+
+        <div class="card-body">
+            <form method="post" action="/edit-distributor-post/{{distributor.id}}/">
+
+                {%csrf_token %}
+                <div class="form-group">
+                    <label>Name:</label>
+                    <input type="text" name="companyname" value="{{distributor.companyname}}">
+                </div>
+                <div class="form-group">
+                    <label>Contact:</label>                    
+                    <input type="text" name="contactname" value="{{distributor.contactname}}">
+                </div>
+                <div class="form-group">
+                    <label>Address:</label>
+                    <input type="text" name="address" value="{{distributor.address}}">
+                </div>
+                <div class="form-group">
+                    <label>Phone:</label>
+                    <input type="text" name="phone" value="{{distributor.phone}}">
+                </div>
+                <div class="form-group">
+                    <label>E-mail:</label>
+                    <input type="text" name="email" value="{{distributor.email}}">
+                </div>
+                <div class="form-group">
+                    <label>Country:</label>
+                    <input type="text" name="country" value="{{distributor.country}}">
+                </div>
+                <input type="submit" value="Save" class="btn btn-success btn-sm">
+                <input type="button" onclick="window.location.href='/distributors'"class="btn btn-secondary btn-sm" value="Cancel">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

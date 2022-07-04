@@ -1,23 +1,22 @@
-SQL-serverin tiedot:
-nwdemoserver.database.windows.net
+PostgreSQL-serverin tiedot:
+ronie-django-db.postgres.database.azure.com
 adminronie
 1careeria2!
 
-Azuren NW-demo appi:
-https://webappdemoronie.azurewebsites.net
+Azuren demo appi:
+https://ronie-django-python-webapp.azurewebsites.net/
+Teppo
+Testaaja
 
-tuotedemoronie.database.windows.net
-YLLÄOLEVAT EI TOIMII ENÄÄ, poistettu azuresta jo...
-YLLÄOLEVAT TUSKIN TOIMII ENÄÄ, poistettu azuresta jo...
-YLLÄOLEVAT TUSKIN TOIMII ENÄÄ, poistettu azuresta jo...
-YLLÄOLEVAT TUSKIN TOIMII ENÄÄ, poistettu azuresta jo...
-YLLÄOLEVAT TUSKIN TOIMII ENÄÄ, poistettu azuresta jo...
+LOKAALISTI
+teppo
+testaaja
 
 
-Käyttäjätunnus kuitenkin pidetty samana kaikkiin:
-
+Käyttäjätunnus serverille:
 adminronie
 1careeria2!
+
 
   "connectionString": "postgresql://adminronie:1careeria2!@ronie-django-db.postgres.database.azure.com/postgres?sslmode=require",
   "databaseName": "flexibleserverdb",
@@ -30,7 +29,7 @@ adminronie
   "username": "adminronie",
   "version": "13"
 
-Tähän jäätiin:
+Tähän jäätiin joskus, (VANHA MERKINTÄ!):
 https://docs.microsoft.com/en-us/azure/app-service/tutorial-python-postgresql-app?tabs=flask%2Cwindows%2Cazure-cli%2Cterminal-powershell%2Cazure-portal-access%2Cvscode-aztools-deploy%2Cdeploy-instructions-azportal%2Cdeploy-instructions--zip-azcli%2Cdeploy-instructions-curl-bash
 
 Jatkoa 16.6:

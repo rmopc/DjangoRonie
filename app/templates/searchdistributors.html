@@ -1,0 +1,85 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<h1>Distributors</h1>
+
+
+<div id="add-div"></div>
+<br />
+
+<button id="add-btn" class="btn btn-success" onclick="showaddform()">Add new Distributor</button>
+<br />
+
+<a href="/distributors" class="btn btn-primary">Show all distributors</a>
+
+<br />
+<form method="post" action="/search-distributors/">
+
+    {%csrf_token %}
+    <input class="card-text" class="card-text" type="text" placeholder="..." name="search">
+
+    <input type="submit" value="Search" class="btn btn-success btn-sm" name="">
+</form>
+
+
+<br />
+
+{% for d in distributors %}
+<div id="list">
+    <div class="card" style="width: 50rem;">
+        <div class="card-body">
+            <h4 class="card-title">{{d.companyname}}</h4>
+            <p class="card-text">{{d.contactname}} | phone: {{d.phone}} | email: {{d.email}} </p>
+            <p class="card-text">Address: {{d.address}} | Country: {{d.country}}</p>
+
+            <a href="/edit-distributor-get/{{d.id}}/" class="btn btn-primary">Edit</a>
+            <a href="/confirm-delete-distributor/{{d.id}}/" class="btn btn-danger">Delete</a>            
+            <!-- <a href="/products-by-supplier/{{s.id}}/" class="btn btn-secondary">{{s.companyname}}'s products</a> -->
+        </div>
+    </div>
+
+    {% empty %}
+
+    <h2>No matches found.</h2>
+</div>
+{%endfor%}
+
+<script>
+
+    let x = `
+    <h2>Please fill in the form below:</h2>
+    
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+            <form method="post" action="/add-distributor/">
+    
+                {% csrf_token %}
+                <input class="card-text" class="card-text" type="text" placeholder="Company-name" name="companyname">
+                <input class="card-text" type="text" placeholder="Contact person" name="contactname">
+                <input class="card-text" type="text" placeholder="Address" name="address">
+                <input class="card-text" type="text" placeholder="Phone" name="phone">
+                <input class="card-text" type="text" placeholder="E-mail" name="email">
+                <input class="card-text" type="text" placeholder="Country" name="country">
+                <br/>
+                <input type="submit" value="Confirm" class="btn btn-success btn-sm" name="">
+                <input type="submit" id="hide-btn" class="btn btn-secondary btn-sm" onclick="hideaddform()" value="Cancel" name="">
+            </form>
+        </div>
+    </div>`
+
+    function showaddform() {
+        document.getElementById("add-div").innerHTML = x
+        $("#add-btn").hide()
+        $("#list").hide()
+    }
+
+    function hideaddform() {
+        document.getElementById("add-div").innerHTML = ""
+        $("#add-btn").show()
+        $("#list").show()
+    }
+
+</script>
+
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Supplier, Product
+from .models import Supplier, Product, Distributor
 from django.contrib.auth import authenticate, login, logout
 
 def loginview(request):
@@ -26,6 +26,7 @@ def logout_action(request):
     logout(request)
     return render(request, 'loginpage.html')
 
+#PRODUCTS
 def productlistview(request): #Tämän voi kopioida muihin funktioihin, johon halutaan auth.
     if not request.user.is_authenticated:
         return render(request, 'loginpage.html')
@@ -66,6 +67,7 @@ def editproductpost(request, id):
     item.save()
     return redirect(productlistview)    
 
+#SUPPLIERS
 def supplierlistview(request):
     supplierlist = Supplier.objects.all()
     context ={'suppliers': supplierlist}
@@ -81,6 +83,22 @@ def addsupplier(request):
     Supplier(companyname = a, contactname = b, address = c, phone = d, email = e, country = f).save()
     return redirect(request.META['HTTP_REFERER'])
 
+def editsupplierget(request, id):
+    supplier = Supplier.objects.get(id = id)
+    context = {'supplier': supplier}
+    return render (request,"editsupplier.html",context)
+
+def editsupplierpost(request, id):
+    item = Supplier.objects.get(id = id)
+    item.companyname = request.POST['companyname']
+    item.contactname = request.POST['contactname']
+    item.address = request.POST['address']
+    item.phone = request.POST['phone']
+    item.email = request.POST['email']
+    item.country = request.POST['country']
+    item.save()
+    return redirect(supplierlistview)        
+
 def deletesupplier(request, id):
     Supplier.objects.get(id = id).delete()
     return redirect(supplierlistview)
@@ -95,3 +113,50 @@ def searchsuppliers(request):
     filtered = Supplier.objects.filter(companyname__icontains=search)
     context = {'suppliers': filtered}
     return render (request,"searchsuppliers.html",context)
+
+#DISTRIBUTORS
+def distributorlistview(request):
+    distributorlist = Distributor.objects.all()
+    context ={'distributors': distributorlist}
+    return render(request, 'distributorlist.html', context)
+
+def adddistributor(request):
+    a = request.POST['companyname']
+    b = request.POST['contactname']
+    c = request.POST['address']
+    d = request.POST['phone']
+    e = request.POST['email']
+    f = request.POST['country']
+    Distributor(companyname = a, contactname = b, address = c, phone = d, email = e, country = f).save()
+    return redirect(request.META['HTTP_REFERER'])
+
+def editdistributorget(request, id):
+    distributor = Distributor.objects.get(id = id)
+    context = {'distributor': distributor}
+    return render (request,"editdistributor.html",context)
+
+def editdistributorpost(request, id):
+    item = Distributor.objects.get(id = id)
+    item.companyname = request.POST['companyname']
+    item.contactname = request.POST['contactname']
+    item.address = request.POST['address']
+    item.phone = request.POST['phone']
+    item.email = request.POST['email']
+    item.country = request.POST['country']
+    item.save()
+    return redirect(distributorlistview)   
+
+def deletedistributor(request, id):
+    Distributor.objects.get(id = id).delete()
+    return redirect(distributorlistview)
+
+def confirmdeletedistributor(request, id):
+    distributor = Distributor.objects.get(id = id)
+    context = {'distributor': distributor}
+    return render (request,"confirmdeletedistributor.html",context)    
+
+def searchdistributors(request):
+    search = request.POST['search']
+    filtered = Distributor.objects.filter(companyname__icontains=search)
+    context = {'distributors': filtered}
+    return render (request,"searchdistributors.html",context)

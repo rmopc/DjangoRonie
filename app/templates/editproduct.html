@@ -12,11 +12,11 @@
 
                 {%csrf_token %}
                 <div class="form-group">
-                    <label>price</label>
+                    <label>Price:</label>
                     <input type="number" step=".01" name="unitprice" value={{product.unitprice}}>
                 </div>
                 <div class="form-group">
-                    <label>stock</label>
+                    <label>Stock:</label>
                     <input type="number" name="unitsinstock" value={{product.unitsinstock}}>
                 </div>
                 <input type="submit" value="Save" class="btn btn-success btn-sm">
