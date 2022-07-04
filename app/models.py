@@ -36,3 +36,12 @@ class Distributor(models.Model):
     # mutta se ei ole välttämätöntä alussa
     def __str__(self):
         return f"{self.companyname} from {self.country}"
+
+class Location(models.Model):
+    name = models.CharField(max_length = 50, default="firma")
+    address = models.CharField(max_length = 50, default="firma")
+    postalcode = models.CharField(max_length = 100, default="firma")
+    # ao:n voi tehdä jos haluaa että admin sivu toimii myöhemmässä vaiheessa paremmin,
+    # mutta se ei ole välttämätöntä alussa
+    def __str__(self):
+        return f"{self.name}"        

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Supplier, Product, Distributor
+from .models import Supplier, Product, Distributor, Location
 from django.contrib.auth import authenticate, login, logout
 
 def loginview(request):
@@ -66,6 +66,15 @@ def editproductpost(request, id):
     item.unitsinstock = request.POST['unitsinstock']
     item.save()
     return redirect(productlistview)    
+
+def deleteproduct(request, id):
+    Product.objects.get(id = id).delete()
+    return redirect(productlistview)
+
+def confirmdeleteproduct(request, id):
+    product = Product.objects.get(id = id)
+    context = {'product': product}
+    return render (request,"confirmdeleteproduct.html",context)   
 
 #SUPPLIERS
 def supplierlistview(request):
@@ -160,3 +169,44 @@ def searchdistributors(request):
     filtered = Distributor.objects.filter(companyname__icontains=search)
     context = {'distributors': filtered}
     return render (request,"searchdistributors.html",context)
+
+#LOCATIONS
+def locationlistview(request):
+    locationlist = Location.objects.all()
+    context ={'locations': locationlist}
+    return render(request, 'locationlist.html', context)
+
+def addlocation(request):
+    a = request.POST['name']
+    b = request.POST['address']
+    c = request.POST['postalcode']
+    Location(name = a, address = b, postalcode = c).save()
+    return redirect(request.META['HTTP_REFERER'])
+
+def editlocationget(request, id):
+    location = Location.objects.get(id = id)
+    context = {'location': location}
+    return render (request,"editlocation.html",context)
+
+def editlocationpost(request, id):
+    item = Location.objects.get(id = id)
+    item.name = request.POST['name']
+    item.address = request.POST['address']
+    item.postalcode = request.POST['postalcode']
+    item.save()
+    return redirect(locationlistview)   
+
+def deletelocation(request, id):
+    Location.objects.get(id = id).delete()
+    return redirect(locationlistview)
+
+def confirmdeletelocation(request, id):
+    location = Location.objects.get(id = id)
+    context = {'location': location}
+    return render (request,"confirmdeletelocation.html",context)    
+
+def searchlocations(request):
+    search = request.POST['search']
+    filtered = Location.objects.filter(companyname__icontains=search)
+    context = {'locations': filtered}
+    return render (request,"searchlocations.html",context)    

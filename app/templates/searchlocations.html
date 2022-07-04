@@ -1,0 +1,85 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<h1>Locations</h1>
+
+
+<div id="add-div"></div>
+<br />
+
+<button id="add-btn" class="btn btn-success" onclick="showaddform()">Add new Location</button>
+<br />
+
+<a href="/locations" class="btn btn-primary">Show all locations</a>
+
+<br />
+<form method="post" action="/search-locations/">
+
+    {%csrf_token %}
+    <input class="card-text" class="card-text" type="text" placeholder="..." name="search">
+
+    <input type="submit" value="Search" class="btn btn-success btn-sm" name="">
+</form>
+
+
+<br />
+
+{% for l in locations %}
+<div id="list">
+    <div class="card" style="width: 50rem;">
+        <div class="card-body">
+            <h3 class="card-title">{{l.name}} </h3>
+            <h5 class="card-text">Address: {{l.address}}</h5>
+            <p class="card-text">Postal Code: {{l.postalcode}}</p>
+            <!-- <p class="card-text" style="color: green;">Units in stock: {{p.unitsinstock}}</p> -->
+            <!-- tähän karttalinkki tms? -->
+
+            <a href="/edit-location-get/{{l.id}}/" class="btn btn-primary">Edit</a>
+            <a href="/confirm-delete-location/{{l.id}}/" class="btn btn-danger">Delete</a>            
+
+        </div>
+    </div>
+
+    {% empty %}
+
+    <h2>No matches found.</h2>
+</div>
+{%endfor%}
+
+<script>
+
+    let x = `
+    <h2>Please fill in the form below:</h2>
+    
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+            <form method="post" action="/add-location/">
+                {%csrf_token %}
+                <input class="card-text" type="text" placeholder="Name" name="name">
+                <input class="card-text" type="text" placeholder="Address" name="address">
+                <input class="card-text" type="text" placeholder="Postal code" name="postalcode">                
+                <br />
+                <br />
+
+                <input type="submit" value="Confirm" class="btn btn-success btn-sm" name="">
+                <input type="submit" id="hide-btn" class="btn btn-secondary btn-sm" onclick="hideaddform()" value="Cancel" name="">
+            </form>
+        </div>
+    </div>`
+
+    function showaddform() {
+        document.getElementById("add-div").innerHTML = x
+        $("#add-btn").hide()
+        $("#list").hide()
+    }
+
+    function hideaddform() {
+        document.getElementById("add-div").innerHTML = ""
+        $("#add-btn").show()
+        $("#list").show()
+    }
+
+</script>
+
+{% endblock %}
