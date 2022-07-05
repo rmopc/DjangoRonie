@@ -24,19 +24,6 @@ class Product(models.Model):
     def __str__(self):
         return f"{self.productname} produced by {self.supplier.companyname}"
 
-
-class Distributor(models.Model):
-    companyname = models.CharField(max_length = 50, default="firma")
-    contactname = models.CharField(max_length = 50, default="firma")
-    address = models.CharField(max_length = 100, default="firma")
-    phone = models.CharField(max_length = 20, default="firma")
-    email = models.CharField(max_length = 50, default="firma")
-    country = models.CharField(max_length = 50, default="firma")
-    # ao:n voi tehdä jos haluaa että admin sivu toimii myöhemmässä vaiheessa paremmin,
-    # mutta se ei ole välttämätöntä alussa
-    def __str__(self):
-        return f"{self.companyname} from {self.country}"
-
 class Location(models.Model):
     name = models.CharField(max_length = 50, default="firma")
     address = models.CharField(max_length = 50, default="firma")
@@ -45,3 +32,16 @@ class Location(models.Model):
     # mutta se ei ole välttämätöntä alussa
     def __str__(self):
         return f"{self.name}"        
+
+class Distributor(models.Model):
+    companyname = models.CharField(max_length = 50, default="firma")
+    contactname = models.CharField(max_length = 50, default="firma")
+    address = models.CharField(max_length = 100, default="firma")
+    phone = models.CharField(max_length = 20, default="firma")
+    email = models.CharField(max_length = 50, default="firma")
+    country = models.CharField(max_length = 50, default="firma")
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, default =1)
+    # ao:n voi tehdä jos haluaa että admin sivu toimii myöhemmässä vaiheessa paremmin,
+    # mutta se ei ole välttämätöntä alussa
+    def __str__(self):
+        return f"{self.companyname}"

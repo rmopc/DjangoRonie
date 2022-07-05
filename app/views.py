@@ -126,8 +126,10 @@ def searchsuppliers(request):
 #DISTRIBUTORS
 def distributorlistview(request):
     distributorlist = Distributor.objects.all()
-    context ={'distributors': distributorlist}
+    locationlist = Location.objects.all()
+    context ={'distributors': distributorlist, 'locations': locationlist}
     return render(request, 'distributorlist.html', context)
+
 
 def adddistributor(request):
     a = request.POST['companyname']
@@ -166,8 +168,9 @@ def confirmdeletedistributor(request, id):
 
 def searchdistributors(request):
     search = request.POST['search']
+    locationlist = Location.objects.all()
     filtered = Distributor.objects.filter(companyname__icontains=search)
-    context = {'distributors': filtered}
+    context = {'distributors': filtered, 'locations': locationlist}
     return render (request,"searchdistributors.html",context)
 
 #LOCATIONS
